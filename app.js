@@ -19,6 +19,13 @@ enterKey.addEventListener("keyup", function(event) {
 });
 
 
+// spinner area
+
+const spinnerFunction = () => {
+  const spinner = document.getElementById('loading-spinner');
+  spinner.classList.toggle('d-none')
+}
+
 // If this key doesn't work
 // Find the name in the url and go to their website
 // to create your own api key
@@ -36,10 +43,11 @@ const showImages = (images) => {
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
     gallery.appendChild(div)
   })
-
+spinnerFunction();
 }
 
 const getImages = (query) => {
+  spinnerFunction();
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     .then(data => showImages(data.hits))
